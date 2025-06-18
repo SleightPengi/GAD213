@@ -1,0 +1,94 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.AI;
+
+public class PlayerDetection : MonoBehaviour
+{
+
+    const string WALK = "Walk";
+    const string IDLE = "Idle";
+
+    [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator animator;
+
+    [SerializeField] float lookRotationSpeed;
+
+    bool aggro = false;
+
+    GameObject currentTarget;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        Debug.Log("Start scripts");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+
+        if (aggro == true)
+        {
+            agent.destination = currentTarget.transform.position;
+        }
+
+
+
+
+
+        FaceTarget();
+        SetAnimations();
+    }
+
+
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (currentTarget == null)
+        {
+            if (collision.tag == "Player")
+            {
+                aggro = true;
+                currentTarget = collision.gameObject;
+            }
+        }
+    }
+
+    
+
+    void FaceTarget()
+    {
+        /*Vector3 direction = (agent.destination - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
+        */
+
+
+        {
+            if (agent.velocity != Vector3.zero)
+            {
+                Vector3 direction = (agent.destination - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
+            }
+        }
+
+    }
+
+
+
+    void SetAnimations()
+    {
+        if (agent.velocity == Vector3.zero)
+        {
+            animator.Play(IDLE);
+        }
+        else
+        {
+            animator.Play(WALK);
+        }
+    }
+
+}
