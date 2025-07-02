@@ -9,7 +9,9 @@ public class playerController : MonoBehaviour
 
     const string WALK = "Walk";
     const string IDLE = "Idle";
+    const string JUMP = "Jump";
 
+    public bool jumping = false;
     public bool controlled;
 
 
@@ -104,13 +106,19 @@ public class playerController : MonoBehaviour
 
     void SetAnimations()
     {
-        if (agent.velocity == Vector3.zero)
+        if (jumping == true)
+        {
+            animator.Play(JUMP);
+            
+        }
+        else if (agent.velocity == Vector3.zero)
         {
             animator.Play(IDLE);
         }
-        else
+        else if (jumping == false)
         {
             animator.Play(WALK);
         }
+       
     }
 }

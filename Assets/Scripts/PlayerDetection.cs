@@ -8,6 +8,9 @@ public class PlayerDetection : MonoBehaviour
 
     const string WALK = "Walk";
     const string IDLE = "Idle";
+    const string JUMP = "Jump";
+
+
 
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Animator animator;
@@ -15,13 +18,14 @@ public class PlayerDetection : MonoBehaviour
     [SerializeField] float lookRotationSpeed;
 
     bool aggro = false;
+    public bool jumping = false;
 
     GameObject currentTarget;
 
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Start scripts");
+        
     }
 
     // Update is called once per frame
@@ -81,14 +85,20 @@ public class PlayerDetection : MonoBehaviour
 
     void SetAnimations()
     {
-        if (agent.velocity == Vector3.zero)
+        if (jumping == true)
+        {
+            animator.Play(JUMP);
+        }
+        else if (agent.velocity == Vector3.zero)
         {
             animator.Play(IDLE);
         }
-        else
+        else if (jumping == false)
         {
             animator.Play(WALK);
         }
+
+        
     }
 
 }
