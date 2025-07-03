@@ -14,7 +14,7 @@ public class playerController : MonoBehaviour
     public bool jumping = false;
     public bool controlled;
 
-
+    
     
 
     [SerializeField]PlayerActions input;
@@ -61,6 +61,7 @@ public class playerController : MonoBehaviour
                 if (clickEffect != null)
                 {
                     Instantiate(clickEffect, hit.point += new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
+                    
                 }
             }
         }

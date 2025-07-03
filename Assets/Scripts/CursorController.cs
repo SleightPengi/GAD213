@@ -16,6 +16,18 @@ public class CursorController : MonoBehaviour
         public static CursorController Instance { get; private set; }
 
 
+        private void Awake()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(this);
+            }
+        }
+
         // Start is called before the first frame update
         void Start()
         {
