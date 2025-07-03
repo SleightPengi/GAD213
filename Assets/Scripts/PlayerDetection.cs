@@ -51,7 +51,7 @@ public class PlayerDetection : MonoBehaviour
     {
         if (currentTarget == null) return;
 
-        if (Vector3.Distance(currentTarget.transform.position, transform.position) <= 1)
+        if (Vector3.Distance(currentTarget.transform.position, transform.position) <= 1.3)
         { agent.SetDestination(transform.position); }
         else
         { agent.SetDestination(currentTarget.transform.position); }
