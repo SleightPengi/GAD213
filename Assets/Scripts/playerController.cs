@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.AI;
+using static Interactable;
 public class playerController : MonoBehaviour
 {
 
@@ -14,8 +15,8 @@ public class playerController : MonoBehaviour
     public bool jumping = false;
     public bool controlled;
 
-    
-    
+    Interactable target;
+    bool playerBusy = false;
 
     [SerializeField]PlayerActions input;
 
@@ -41,7 +42,16 @@ public class playerController : MonoBehaviour
     }
 
 
-
+    void FollowTarget()
+    {
+        
+        if (target == null) return;
+        Debug.Log("Follow target called");
+        if (Vector3.Distance(target.transform.position, transform.position) <= 1)
+        { ReachDistance(); }
+        else
+        { agent.SetDestination(target.transform.position); }
+    }
 
     void AssignInputs()
     {
@@ -57,15 +67,52 @@ public class playerController : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers))
             {
-                agent.destination = hit.point;
-                if (clickEffect != null)
+                
+                if (hit.transform.CompareTag("Interactable"))
                 {
-                    Instantiate(clickEffect, hit.point += new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
                     
+                    target = hit.transform.GetComponent<Interactable>();
+                    if (clickEffect != null)
+                    { Instantiate(clickEffect, hit.transform.position + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); }
+                }
+                else
+                {
+                    target = null;
+
+                    agent.destination = hit.point;
+                    if (clickEffect != null)
+                    { Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); }
                 }
             }
         }
     }
+
+    void ReachDistance()
+    {
+        
+        agent.SetDestination(transform.position);
+
+        if (playerBusy) return;
+
+        playerBusy = true;
+
+        switch (target.interactionType)
+        {
+            case InteractableType.Enemy:
+
+                break;
+            case InteractableType.Item:
+               
+                target.InteractWithItem();
+                target = null;
+
+                Invoke(nameof(ResetBusyState), 0.5f);
+                break;
+        }
+    }
+
+
+
 
     void OnEnable()
     {
@@ -79,17 +126,15 @@ public class playerController : MonoBehaviour
 
     void Update()
     {
+        FollowTarget();
         FaceTarget();
         SetAnimations();
     }
 
-
+    /*
     void FaceTarget()
     {
-        /*Vector3 direction = (agent.destination - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
-        */
+        
 
 
         {
@@ -102,8 +147,28 @@ public class playerController : MonoBehaviour
         }
 
     }
+    */
 
+    void FaceTarget()
+    {
+        if (agent.destination == transform.position) return;
 
+        Vector3 facing = Vector3.zero;
+        if (target != null)
+        { facing = target.transform.position; }
+        else
+        { facing = agent.destination; }
+
+        Vector3 direction = (facing - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
+    }
+
+    void ResetBusyState()
+    {
+        playerBusy = false;
+        SetAnimations();
+    }
 
     void SetAnimations()
     {

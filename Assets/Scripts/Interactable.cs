@@ -19,7 +19,7 @@ public class Interactable : MonoBehaviour
             //myActor = GetComponent<actor>();
         }
 
-        if (interactionType == InteractableType.Item)
+        /*if (interactionType == InteractableType.Item)
         {
            
             Debug.Log("Clicked");
@@ -29,7 +29,7 @@ public class Interactable : MonoBehaviour
 
             }
             
-        }
+        }*/
 
         /*if (interactionType == InteractableType.Player)
         {
@@ -58,11 +58,19 @@ public class Interactable : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collided");
+        
         if (collision.transform.tag == "Player")
         {
-            Debug.Log("player collided");
+            
             inRange = true;
         }
     }
+
+
+    public void InteractWithItem()
+    {
+        // Pickup Item
+        Destroy(gameObject);
+    }
+
 }

@@ -1694,7 +1694,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -2229,6 +2229,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5351293993192526654, guid: f6e5c5310e949e74cb4392c4ced48777,
         type: 3}
+    - target: {fileID: 7322443887215291340, guid: 2646ab9dbaadd3d40b04fd8d178711f7,
+        type: 3}
+      propertyPath: clickableLayers.m_Bits
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 8508468489234573403, guid: 2646ab9dbaadd3d40b04fd8d178711f7,
         type: 3}
       propertyPath: m_LocalPosition.x
