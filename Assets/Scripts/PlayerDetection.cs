@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class PlayerDetection : MonoBehaviour
 {
@@ -41,12 +42,20 @@ public class PlayerDetection : MonoBehaviour
 
 
 
-
+        FollowTarget();
         FaceTarget();
         SetAnimations();
     }
 
+    void FollowTarget()
+    {
+        if (currentTarget == null) return;
 
+        if (Vector3.Distance(currentTarget.transform.position, transform.position) <= 1)
+        { agent.SetDestination(transform.position); }
+        else
+        { agent.SetDestination(currentTarget.transform.position); }
+    }
 
     private void OnTriggerEnter(Collider collision)
     {

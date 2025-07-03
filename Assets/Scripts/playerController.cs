@@ -46,7 +46,7 @@ public class playerController : MonoBehaviour
     {
         
         if (target == null) return;
-        Debug.Log("Follow target called");
+        
         if (Vector3.Distance(target.transform.position, transform.position) <= 1)
         { ReachDistance(); }
         else
