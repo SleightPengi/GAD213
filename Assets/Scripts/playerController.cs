@@ -47,7 +47,7 @@ public class playerController : MonoBehaviour
         
         if (target == null) return;
         
-        if (Vector3.Distance(target.transform.position, transform.position) <= 1)
+        if (Vector3.Distance(target.transform.position, transform.position) <= 1.3f)
         { ReachDistance(); }
         else
         { agent.SetDestination(target.transform.position); }
@@ -100,6 +100,8 @@ public class playerController : MonoBehaviour
         {
             case InteractableType.Enemy:
 
+                target = null;
+
                 break;
             case InteractableType.Item:
                
@@ -131,23 +133,7 @@ public class playerController : MonoBehaviour
         SetAnimations();
     }
 
-    /*
-    void FaceTarget()
-    {
-        
-
-
-        {
-            if (agent.velocity != Vector3.zero)
-            {
-                Vector3 direction = (agent.destination - transform.position).normalized;
-                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
-            }
-        }
-
-    }
-    */
+  
 
     void FaceTarget()
     {

@@ -79,13 +79,16 @@ public class PlayerDetection : MonoBehaviour
         */
 
 
-        {
+        
             if (agent.velocity != Vector3.zero)
             {
                 Vector3 direction = (agent.destination - transform.position).normalized;
                 Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * lookRotationSpeed);
             }
+            else if (aggro == true)
+        {
+
         }
 
     }

@@ -2195,10 +2195,20 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1329909892668212219, guid: 69833375a7bb8b44ebe83bc5e938a248,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     - target: {fileID: 1593061888185376281, guid: 69833375a7bb8b44ebe83bc5e938a248,
         type: 3}
       propertyPath: m_Name
       value: BasicEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593061888185376281, guid: 69833375a7bb8b44ebe83bc5e938a248,
+        type: 3}
+      propertyPath: m_TagString
+      value: Interactable
       objectReference: {fileID: 0}
     - target: {fileID: 2112295927249159331, guid: 69833375a7bb8b44ebe83bc5e938a248,
         type: 3}
@@ -2248,6 +2258,11 @@ PrefabInstance:
     - target: {fileID: 2112295927249159331, guid: 69833375a7bb8b44ebe83bc5e938a248,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6801553961005087694, guid: 69833375a7bb8b44ebe83bc5e938a248,
+        type: 3}
+      propertyPath: m_UseGravity
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

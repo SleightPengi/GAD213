@@ -73,4 +73,6 @@ public class Interactable : MonoBehaviour
         Destroy(gameObject);
     }
 
+
+
 }
