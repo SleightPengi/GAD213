@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -22,6 +23,13 @@ public class CharacterSwap : MonoBehaviour
 
 
 
+    [Header("Borders")]
+    [SerializeField] GameObject captainBorder;
+    [SerializeField] GameObject bardBorder;
+    [SerializeField] GameObject sharkBorder;
+    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +45,12 @@ public class CharacterSwap : MonoBehaviour
             _CaptainController.controlled = true;
             _BardController.controlled = false;
             _SharkController.controlled = false;
+
+            captainBorder.SetActive(true);
+            bardBorder.SetActive(false);
+            sharkBorder.SetActive(false);
+
+
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -45,6 +59,12 @@ public class CharacterSwap : MonoBehaviour
             _BardController.controlled = true;
             _CaptainController.controlled = false;
             _SharkController.controlled = false;
+
+            captainBorder.SetActive(false);
+            bardBorder.SetActive(true);
+            sharkBorder.SetActive(false);
+
+
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -53,6 +73,11 @@ public class CharacterSwap : MonoBehaviour
             _SharkController.controlled = true;
             _BardController.controlled = false;
             _CaptainController.controlled = false;
+
+
+            captainBorder.SetActive(false);
+            bardBorder.SetActive(false);
+            sharkBorder.SetActive(true);
         }
     }
 }

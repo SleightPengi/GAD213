@@ -21,7 +21,7 @@ public class PlayerDetection : MonoBehaviour
     bool aggro = false;
     public bool jumping = false;
 
-    GameObject currentTarget;
+    [SerializeField] GameObject currentTarget;
 
     // Start is called before the first frame update
     void Start()
@@ -63,6 +63,7 @@ public class PlayerDetection : MonoBehaviour
         {
             if (collision.tag == "Player")
             {
+             
                 aggro = true;
                 currentTarget = collision.gameObject;
             }

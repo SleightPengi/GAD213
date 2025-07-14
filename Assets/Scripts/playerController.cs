@@ -78,7 +78,7 @@ public class playerController : MonoBehaviour
                 else
                 {
                     target = null;
-
+                    
                     agent.destination = hit.point;
                     if (clickEffect != null)
                     { Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); }
