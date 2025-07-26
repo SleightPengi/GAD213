@@ -61,7 +61,7 @@ public class playerController : MonoBehaviour
 
     void ClickToMove()
     {
-        if (controlled == true)
+        if (controlled == true && Time.timeScale != 0)
         {
 
             RaycastHit hit;

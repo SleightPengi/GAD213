@@ -11,9 +11,29 @@ public class Interactable : MonoBehaviour
    // public Actor myActor;
     public InteractableType interactionType;
     private bool inRange;
+    [SerializeField] private Inventory inventory;
+    [SerializeField] private GameObject manager;
+
+
+
+
+    public void InteractWithItem()
+    {
+       
+
+        manager.GetComponent<InventoryOpening>().itemsReady += 1;
+
+        // Pickup Item
+        Destroy(gameObject);
+    }
 
     private void Awake()
     {
+        
+        manager = GameObject.Find("Game Controller");
+        inventory = FindAnyObjectByType<Inventory>();
+
+
         if (interactionType == InteractableType.Enemy)
         {
             //myActor = GetComponent<actor>();
@@ -67,11 +87,6 @@ public class Interactable : MonoBehaviour
     }
 
 
-    public void InteractWithItem()
-    {
-        // Pickup Item
-        Destroy(gameObject);
-    }
 
 
 
